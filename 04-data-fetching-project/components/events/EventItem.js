@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import classes from "./EventItem.module.css";
 import Button from "../ui/Button";
@@ -17,7 +18,7 @@ const EventItem = ({ item }) => {
 
   return (
     <li className={classes.item} key={item.id}>
-      <img src={`/${item.image}`} alt={item.title} />
+      <Image src={`/${item.image}`} alt={item.title} width={640} height={160} />
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{item.title}</h2>

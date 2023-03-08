@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getFilteredEvents } from "../../helpers/api-util";
@@ -40,6 +41,13 @@ const FilteredEventsPage = (props) => {
   const year = +filterData[0];
   const month = +filterData[1];
 
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`All events for ${month}/${year}.`} />
+    </Head>
+  );
+
   if (
     isNaN(year) ||
     isNaN(month) ||
@@ -51,6 +59,7 @@ const FilteredEventsPage = (props) => {
     return (
       <>
         <ErrorAlert>
+          {pageHeadData}
           <p className="center">Invalid filter. Please adjust your values!</p>
           <Button>Show All Events</Button>
         </ErrorAlert>
@@ -68,6 +77,7 @@ const FilteredEventsPage = (props) => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p className="center">No events found for the chosen filter!</p>
           <Button>Show All Events</Button>
@@ -80,6 +90,7 @@ const FilteredEventsPage = (props) => {
 
   return (
     <>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
